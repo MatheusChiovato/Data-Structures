@@ -21,7 +21,7 @@ void messPlate(Plate p){
         cleanStack=top_CleanPlate;
         top_CleanPlate--;
         dirtyStack++;
-        printf("Mais 1 prato sujo!");
+        printf("Mais 1 prato sujo!\n");
     } else{
         printf("A pilha de pratos limpos está vazia!");
     }
@@ -35,9 +35,9 @@ void cleanPlate(Plate p){
         cleanPlates[top_CleanPlate]=dirtyPlates[top_DirtyPlate];
         top_DirtyPlate--;
         dirtyStack--;
-        printf("Prato limpo!");
+        printf("Prato limpo!\n");
     } else{
-        printf("A pilha de pratos sujos está vazia!");        
+        printf("A pilha de pratos sujos esta vazia!\n");        
     }
 
 }
@@ -60,7 +60,8 @@ int main(){
 
     printf("\n");
 
-    messPlate(cleanPlates[10]);
+    messPlate(cleanPlates[cleanStack]);
+    messPlate(cleanPlates[cleanStack]);
 
     printf("\n");
 
@@ -69,6 +70,10 @@ int main(){
 
     printf("\n");
 
+    cleanPlate(dirtyPlates[dirtyStack]);
+
+    printf("Pratos Limpos: %d\n", cleanStack);
+    printf("Pratos Sujos: %d\n", dirtyStack);
 
     return 0;
 }
