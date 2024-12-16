@@ -16,6 +16,23 @@ typedef struct{
     struct Drink bebida;
 }Order;
 
+Order orderQueue[10];     // lista para armazenar os pedidos feitos a medida que forem sendo adicionados
+int maxRequest=10;      
+int orderPos=0;
+
+
+void makeOrderAuto(struct Food pFood, struct Drink pDrink){
+    orderQueue[orderPos].comida = pFood;
+    orderQueue[orderPos].bebida = pDrink;
+    orderPos++;
+}
+
+void printOrders(){
+    for(int i=0;i<orderPos;i++){
+            printf("Pedido n %d: %s acompanhado de %s\n",i+1, orderQueue[i].comida.name,orderQueue[i].bebida.name);
+    }
+}
+
 void showFoodMenu(){   //printa no terminal as comidas 
     printf("======================\n");
     printf("\n");
@@ -36,12 +53,8 @@ void showDrinkMenu(){
     printf("4 - Nada\n");
 }
 
-Order orderQueue[10];     // lista para armazenar os pedidos feitos a medida que forem sendo adicionados
-int maxRequest=10;      
-int orderPos=0;
 
-
-void makeFoodOrder(){
+void makeFoodOrderTerminal(){
     
 
     if(orderPos<maxRequest){
@@ -79,14 +92,14 @@ void makeFoodOrder(){
         printf("Limite de pedidos excedido, por favor aguarde!");
     }
 
-    makeDrinkOrder();
+    makeDrinkOrderTerminal();
 
     orderPos++;
 }
 
 
 
-void makeDrinkOrder(){     
+void makeDrinkOrderTerminal(){     
         int choice;
         printf("\n");
         showDrinkMenu();
@@ -119,6 +132,7 @@ void makeDrinkOrder(){
 
 
 
+
 int main(){
 
     strcpy(hamburgao.name, "Hamburgao");    //inicializando as Comidas
@@ -136,9 +150,16 @@ int main(){
     agua.price=2.25;
 
     printf("\n");
-    makeFoodOrder();
+    makeOrderAuto(pizza, refrigerante);
+    makeOrderAuto(quibe, suco);
+    makeOrderAuto(hamburgao, refrigerante);
+    makeOrderAuto(quibe, agua);
+    makeOrderAuto(pizza, suco);
+    makeOrderAuto(hamburgao, agua);
 
-    printf("Pedido n %d de %s: %s acompanhado de %s",orderPos, orderQueue[0].client,orderQueue[0].comida.name,orderQueue[0].bebida.name);
+    printOrders();
+
+    
 
 
     return 0;
