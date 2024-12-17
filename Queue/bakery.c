@@ -27,9 +27,21 @@ void makeOrderAuto(struct Food pFood, struct Drink pDrink){
     orderPos++;
 }
 
+void serveOrder(){
+    if(orderPos!=0){
+        for(int i=0;i<orderPos;i++){
+            orderQueue[i]=orderQueue[i+1];
+        }
+    orderPos--;
+    } else{
+        printf("Sem pedidos para servir!\n");
+    }
+}
+
 void printOrders(){
+    printf("Lista de Pedidos:\n");
     for(int i=0;i<orderPos;i++){
-            printf("Pedido n %d: %s acompanhado de %s\n",i+1, orderQueue[i].comida.name,orderQueue[i].bebida.name);
+            printf("Pedido %d: %s acompanhado de %s\n",i+1, orderQueue[i].comida.name,orderQueue[i].bebida.name);
     }
 }
 
@@ -158,7 +170,10 @@ int main(){
     makeOrderAuto(hamburgao, agua);
 
     printOrders();
-
+    printf("\n");
+    serveOrder();
+    printf("\n");
+    printOrders();
     
 
 
